@@ -1,0 +1,11 @@
+commit 3fd2bae441bb14832bf229d2373b0dd9c7e0546b
+Author: EMikhasenko <cookies22811@gmail.com>
+Date:   Mon Feb 17 01:00:27 2020 +0300
+
+    add status.txt
+
+commit d3ad3fa4b6cc49928411ad339bb4a9e988068cd2
+Author: EMikhasenko <cookies22811@gmail.com>
+Date:   Mon Feb 17 00:59:15 2020 +0300
+
+    add .gitignore
