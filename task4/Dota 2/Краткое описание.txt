@@ -1,0 +1,10 @@
+https://api.opendota.com/api/players/127875219/heroes? - возвращает информацию о героях, на которых играл пользователь с ID 12785219
+Параметры - ID игрока.
+https://api.opendota.com/api/players/127875219/matches?limit=50&sort - возвращает информацию о последних матчах
+Параметры - ID игрока
+limit=int - количество матчей для отображения
+sort - сортировка в убывающем порядка относительно match_id
+https://api.opendota.com/api/players/127875219/wl?is_radiant&game_mode=1 - возвращает количество побед и поражений
+Параметр - ID игрока
+is_radiant - фильтровать матчи лишь за сторону radiant
+game_mode - ID режима игры

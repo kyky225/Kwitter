@@ -1,0 +1,99 @@
+{
+	"info": {
+		"_postman_id": "3875b6f2-467b-4559-bbdd-fedda37c9346",
+		"name": "Dota 2",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "https://api.opendota.com/api/players/127875219/matches?limit=50&sort",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.opendota.com/api/players/127875219/matches?limit=50&sort",
+					"protocol": "https",
+					"host": [
+						"api",
+						"opendota",
+						"com"
+					],
+					"path": [
+						"api",
+						"players",
+						"127875219",
+						"matches"
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "50"
+						},
+						{
+							"key": "sort",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://api.opendota.com/api/players/127875219/wl?is_radiant&game_mode=1",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.opendota.com/api/players/127875219/wl?is_radiant&game_mode=1",
+					"protocol": "https",
+					"host": [
+						"api",
+						"opendota",
+						"com"
+					],
+					"path": [
+						"api",
+						"players",
+						"127875219",
+						"wl"
+					],
+					"query": [
+						{
+							"key": "is_radiant",
+							"value": null
+						},
+						{
+							"key": "game_mode",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://api.opendota.com/api/players/127875219/heroes?",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.opendota.com/api/players/127875219/heroes?",
+					"protocol": "https",
+					"host": [
+						"api",
+						"opendota",
+						"com"
+					],
+					"path": [
+						"api",
+						"players",
+						"127875219",
+						"heroes"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

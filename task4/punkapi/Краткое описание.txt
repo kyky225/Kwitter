@@ -1,0 +1,5 @@
+https://api.punkapi.com/v2/beers/1 - возвращает информацию о пиве с id 1
+https://api.punkapi.com/v2/beers?abv_gt2&ibu_gt=2 - возвращает информацию о пиве, подходящее под параметры
+abv_gt - пиво должно иметь ABV больше, чем 2
+ibu_gt - пиво должно иметь IBU больше, чем 2
+https://api.punkapi/v2/beers/random - получить информацию о случайном пиве
