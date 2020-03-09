@@ -1,0 +1,94 @@
+{
+	"info": {
+		"_postman_id": "0d278e5f-8f52-4964-98c1-9ba136a38c7e",
+		"name": "punkapi",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "https://api.punkapi.com/v2/beers?abv_gt=2&ibu_gt=2",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.punkapi.com/v2/beers?abv_gt=2&ibu_gt=2",
+					"protocol": "https",
+					"host": [
+						"api",
+						"punkapi",
+						"com"
+					],
+					"path": [
+						"v2",
+						"beers"
+					],
+					"query": [
+						{
+							"key": "abv_gt",
+							"value": "2"
+						},
+						{
+							"key": "ibu_gt",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://api.punkapi.com/v2/beers/1",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.punkapi.com/v2/beers/1",
+					"protocol": "https",
+					"host": [
+						"api",
+						"punkapi",
+						"com"
+					],
+					"path": [
+						"v2",
+						"beers",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://api.punkapi.com/v2/beers?abv_gt=2&ibu_gt=2",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.punkapi.com/v2/beers?abv_gt=2&ibu_gt=2",
+					"protocol": "https",
+					"host": [
+						"api",
+						"punkapi",
+						"com"
+					],
+					"path": [
+						"v2",
+						"beers"
+					],
+					"query": [
+						{
+							"key": "abv_gt",
+							"value": "2"
+						},
+						{
+							"key": "ibu_gt",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
