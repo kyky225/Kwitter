@@ -180,62 +180,82 @@
         },
     ];
 
-    const postProperties = [
+    const requiredProperties = [
         'id',
         'description',
         'createdAt',
-        'author',
-        'photoLink',
+        'author'
+    ];
+
+    const optionalProperties = [
         'likes',
+        'photoLink',
         'hashTags'
     ];
 
+    const allProperties = [
+        'likes',
+        'photoLink',
+        'hashTags',
+        'id',
+        'description',
+        'createdAt',
+        'author'
+    ];
+
     function validatePost(post) {
+        if (typeof post !== 'object') {
+            return false;
+        }
         let optionalFieldAmount = 0;
-        if (!post.hasOwnProperty('id') || typeof post.id !== 'string') {
-            return false;
-        }
 
-        if (!post.hasOwnProperty('description') || typeof post.description !== 'string'
-            || post.description.length >= 200) {
-            return false;
-        }
-
-        if (!post.hasOwnProperty('createdAt') || !(post.createdAt instanceof Date)) {
-            return false;
-        }
-
-        if (!post.hasOwnProperty('author') || typeof post.author !== 'string') {
-            return false;
-        }
-
-        if (!post.hasOwnProperty('photoLink') || typeof post.photoLink !== 'string') {
-            optionalFieldAmount--;
-        }
-
-        if (!post.hasOwnProperty('likes') || !Array.isArray(post.likes)) {
-            return false;
-        }
-        else {
-            if (!post.likes.every(function(element, index, array) {
-                return typeof element === 'string';
-            })) {
-                optionalFieldAmount++;
+        for (let index = 0; index < requiredProperties.length; ++index) {
+            let property = requiredProperties[index];
+            if (!post.hasOwnProperty(property)) {
+                return false;
+            }
+            switch (property) {
+                case 'id':
+                case 'description':
+                case 'author': {
+                    if (typeof post[property] !== 'string') {
+                        return false;
+                    }
+                    break;
+                }
+                case 'createdAt': {
+                    if (!(post[property] instanceof  Date)) {
+                        return false;
+                    }
+                    break;
+                }
+                default:
+                    break;
             }
         }
 
-        if (!post.hasOwnProperty('hastTags') || !Array.isArray(post.hashTags)) {
-            optionalFieldAmount--;
+        for (let index = 0; index < optionalProperties.length; ++index) {
+            let property = optionalProperties[index];
+            if (post.hasOwnProperty(property)) {
+                switch (property) {
+                    case 'hashTags':
+                    case 'likes':
+                    case 'photoLink': {
+                        if (!Array.isArray(post[property])
+                            && !post[property].every(function (element, index, array) {
+                                return typeof element === 'string';
+                            })) {
+                            return false;
+                        }
+                        optionalFieldAmount++;
+                        break;
+                    }
+                    default:
+                        break;
+                }
+            }
         }
-        else {
-            if (!post.hastTags.every(function(element, index, array) {
-                return typeof element === 'string';
-            })) {
-                optionalFieldAmount++;
-             }
-        }
-
-        return post.keys().length === postProperties.length - optionalFieldAmount;
+        return requiredProperties.length + optionalFieldAmount === Object.keys(post).length;
     }
 
     function compareDates(a, b) {
@@ -243,37 +263,80 @@
     }
 
 
-    function validateFilerConfig(filterConfig) {
+    //all properties in filter config are optional and aren't empty
+    function validateFilterConfig(filterConfig) {
+        let optionalFieldAmount = 0;
 
-    }
-
-    function isValid(post, filterConfig) {
-        if (filterConfig.author !== '' && filterConfig.author !== post.author) {
-            return false;
+        for (let index = 0; index < allProperties.length; ++index) {
+            let property = allProperties[index];
+            if (filterConfig.hasOwnProperty(property)) {
+                switch (property) {
+                    case 'hashTags':
+                    case 'likes':
+                    case 'photoLink': {
+                        if (!Array.isArray(filterConfig[property])
+                            && !filterConfig[property].every(function (element, index, array) {
+                                return typeof element === 'string';
+                            })) {
+                            return false;
+                        }
+                        optionalFieldAmount++;
+                        break;
+                    }
+                    case 'id':
+                    case 'description':
+                    case 'author': {
+                        if (typeof filterConfig[property] !== 'string') {
+                            return false;
+                        }
+                        optionalFieldAmount++;
+                        break;
+                    }
+                    case 'createdAt': {
+                        if (!(filterConfig[property] instanceof  Date)) {
+                            return false;
+                        }
+                        optionalFieldAmount++;
+                        break;
+                    }
+                    default:
+                        break;
+                }
+            }
         }
 
-        return !(filterConfig.createdAt instanceof Date && compareDates(post.createdAt, filterConfig.createdAt) > 0);
+        return optionalFieldAmount === Object.keys(filterConfig).length;
+    }
+
+    function isValid(element, index, array) {
+        for (let property in this) {
+            if (this.hasOwnProperty(property)) {
+                if (property === 'hashTags' || property === 'likes') {
+                    //hashtag or nickname of person, who liked post
+                    for (let filterElem in this[property]) {
+                        if (!element[property].find(arrayElem => arrayElem === filterElem)) {
+                            return false;
+                        }
+                    }
+                } else {
+                    if (!element.hasOwnProperty(property) || element[property] !== this[property]) {
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
     }
 
     function getPosts(skip = 0, top = 10, filterConfig) {
         posts.sort(compareDates);
-        let newList = [];
-        validateFilerConfig(filterConfig);
-        for (let i = skip; i < posts.length && i < skip + top; ++i) {
-            if (isValid(posts[i], filterConfig)) {
-                newList.push(posts[i]);
-            }
-        }
-        return newList;
+        validateFilterConfig(filterConfig);
+        return posts.filter(isValid, filterConfig);
     }
 
     function getPost(id) {
         if (id && typeof id === 'string') {
-            for (let postObject in posts) {
-                if (postObject['id'] === id) {
-                    return postObject;
-                }
-            }
+            return posts.find(item => item.id === id);
         }
         return undefined;
     }
@@ -286,19 +349,48 @@
         return true;
     }
 
+    function validateProperties(post) {
+        if (typeof post !== 'object') {
+            return false;
+        }
+        for (let property in post) {
+            if (post.hasOwnProperty(property)) {
+                switch (property) {
+                    case 'description': {
+                        if (typeof post[property] !== 'string') {
+                            return false;
+                        }
+                        break;
+                    }
+                    case 'hashTags':
+                    case 'photoLink': {
+                        if (!Array.isArray(post[property])
+                            && !post[property].every(function (element, index, array) {
+                                return typeof element === 'string';
+                            })) {
+                            return false;
+                        }
+                        break;
+                    }
 
-    //check post only for editPost
-    function validateProperties() {
-        //latter
+                    default: {
+                        return false;
+                    }
+                }
+            }
+        }
         return true;
     }
 
     function editPost(id, post) {
-        validateProperties(post);
+        if (!validateProperties(post)) {
+            return false;
+        }
         for (let i = 0; i < posts.length; ++i) {
             if (posts[i].id === id) {
-                let tmpKeys = post.keys();
-                for (let key in tmpKeys) {
+                let tmpKeys = Object.keys(post);
+                for (let index = 0; index < tmpKeys.length; ++index) {
+                    let key =  tmpKeys[index];
                     posts[i][key] = post[key];
                 }
                 return true;
@@ -312,14 +404,15 @@
             return false;
         }
 
-        for (let i = 0; i < posts.length; ++i) {
-            if (posts[i].id === id) {
-                posts.splice(i, 1);
-                return true;
-            }
+        let removePostIndex = posts.findIndex(item => item.id === id);
+        if (removePostIndex === -1) {
+            return false;
         }
+        posts.splice(removePostIndex, 1);
+        return true;
     }
 
+    Boost.validateFilterConfig = validateFilterConfig;
     Boost.getPosts = getPosts;
     Boost.posts = posts;
     Boost.getPost = getPost;
