@@ -1,3 +1,4 @@
+'use strict';
 const Boost = (function() {
     let posts = [
         {
@@ -5,7 +6,7 @@ const Boost = (function() {
             description: 'super desc 1',
             createdAt: new Date('2000-03-17T12:12:12'),
             author: 'Agent 1',
-            photoLink: 'https://en.wikipedia.org/wiki/Joseph_Stalin#/media/File:Stalin_Full_Image.jpg',
+            photoLinks: ['https://en.wikipedia.org/wiki/Joseph_Stalin#/media/File:Stalin_Full_Image.jpg'],
             likes: ['Peter', 'Arnold', 'Stalin'],
             hashTags: ['USSR', 'Stalin']
         },
@@ -14,7 +15,6 @@ const Boost = (function() {
             description: 'super desc 2',
             createdAt: new Date('2001-03-17T12:12:12'),
             author: 'Agent 2',
-            photoLink: '',
             likes: ['Peter', 'Arnold'],
             hashTags: ['USA']
         },
@@ -23,7 +23,6 @@ const Boost = (function() {
             description: 'super desc 1',
             createdAt: new Date('2003-03-17T12:12:12'),
             author: 'Agent 3',
-            photoLink: '',
             likes: ['Peter', 'Arnold', 'Stalin'],
             hashTags: ['USSR', 'Stalin']
         },
@@ -32,7 +31,6 @@ const Boost = (function() {
             description: 'super desc 1',
             createdAt: new Date('2004-03-17T12:12:12'),
             author: 'Agent 4',
-            photoLink: '',
             likes: ['Peter', 'Arnold', 'Stalin'],
             hashTags: ['USSR', 'Stalin']
         },
@@ -41,7 +39,6 @@ const Boost = (function() {
             description: 'super desc 5',
             createdAt: new Date('2005-03-17T12:12:12'),
             author: 'Agent 5',
-            photoLink: '',
             likes: ['Peter', 'Arnold', 'Stalin'],
             hashTags: ['USSR', 'Stalin']
         },
@@ -50,7 +47,6 @@ const Boost = (function() {
             description: 'super desc 6',
             createdAt: new Date('2006-03-17T12:12:12'),
             author: 'Agent 6',
-            photoLink: '',
             likes: ['Peter', 'Arnold', 'Stalin'],
             hashTags: ['USSR', 'Stalin']
         },
@@ -59,7 +55,6 @@ const Boost = (function() {
             description: 'super desc 7',
             createdAt: new Date('2007-03-17T12:12:12'),
             author: 'Agent 7',
-            photoLink: '',
             likes: ['Peter', 'Arnold', 'Stalin'],
             hashTags: ['USSR', 'Stalin']
         },
@@ -68,7 +63,6 @@ const Boost = (function() {
             description: 'super desc 8',
             createdAt: new Date('2008-03-17T12:12:12'),
             author: 'Agent 8',
-            photoLink: '',
             likes: ['Peter', 'Arnold', 'Stalin'],
             hashTags: ['USSR', 'Stalin']
         },
@@ -77,7 +71,6 @@ const Boost = (function() {
             description: 'super desc 9',
             createdAt: new Date('2009-03-17T12:12:12'),
             author: 'Agent 9',
-            photoLink: '',
             likes: ['Peter', 'Arnold', 'Stalin'],
             hashTags: ['USSR', 'Stalin']
         },
@@ -86,7 +79,6 @@ const Boost = (function() {
             description: 'super desc 10',
             createdAt: new Date('2010-03-17T12:12:12'),
             author: 'Agent 10',
-            photoLink: '',
             likes: ['Peter', 'Arnold', 'Stalin'],
             hashTags: ['USSR', 'Stalin']
         },
@@ -95,7 +87,6 @@ const Boost = (function() {
             description: 'super desc 11',
             createdAt: new Date('2011-03-17T12:12:12'),
             author: 'Agent 11',
-            photoLink: '',
             likes: ['Peter', 'Arnold', 'Stalin'],
             hashTags: ['USSR', 'Stalin']
         },
@@ -104,7 +95,6 @@ const Boost = (function() {
             description: 'super desc 12',
             createdAt: new Date('2012-03-17T12:12:12'),
             author: 'Agent 12',
-            photoLink: '',
             likes: ['Peter', 'Arnold', 'Stalin'],
             hashTags: ['USSR', 'Stalin']
         },
@@ -113,7 +103,6 @@ const Boost = (function() {
             description: 'super desc 13',
             createdAt: new Date('2013-03-17T12:12:12'),
             author: 'Agent 13',
-            photoLink: '',
             likes: ['Peter', 'Arnold', 'Stalin'],
             hashTags: ['USSR', 'Stalin']
         },
@@ -122,7 +111,6 @@ const Boost = (function() {
             description: 'super desc 14',
             createdAt: new Date('2014-03-17T12:12:12'),
             author: 'Agent 14',
-            photoLink: '',
             likes: ['Peter', 'Arnold', 'Stalin'],
             hashTags: ['USSR', 'Stalin']
         },
@@ -131,7 +119,6 @@ const Boost = (function() {
             description: 'super desc 15',
             createdAt: new Date('2015-03-17T12:12:12'),
             author: 'Agent 15',
-            photoLink: '',
             likes: ['Peter', 'Arnold', 'Stalin'],
             hashTags: ['USSR', 'Stalin']
         },
@@ -140,7 +127,6 @@ const Boost = (function() {
             description: 'super desc 16',
             createdAt: new Date('2016-03-17T12:12:12'),
             author: 'Agent 16',
-            photoLink: '',
             likes: ['Peter', 'Arnold', 'Stalin'],
             hashTags: ['USSR', 'Stalin']
         },
@@ -149,7 +135,6 @@ const Boost = (function() {
             description: 'super desc 17',
             createdAt: new Date('2017-03-17T12:12:12'),
             author: 'Agent 17',
-            photoLink: '',
             likes: ['Peter', 'Arnold', 'Stalin'],
             hashTags: ['USSR', 'Stalin']
         },
@@ -176,7 +161,7 @@ const Boost = (function() {
             author: 'Agent 20',
             likes: ['Peter', 'Arnold', 'Stalin'],
             hashTags: ['USSR', 'Stalin']
-        },
+        }
     ];
 
     const requiredProperties = [
@@ -188,13 +173,13 @@ const Boost = (function() {
 
     const optionalProperties = [
         'likes',
-        'photoLink',
+        'photoLinks',
         'hashTags'
     ];
 
     const allProperties = [
         'likes',
-        'photoLink',
+        'photoLinks',
         'hashTags',
         'id',
         'description',
@@ -212,10 +197,128 @@ const Boost = (function() {
             }
         }
 
-        getPosts(skip = 0, top = 10, filterConfig) {
-            posts.sort(PostCollection._compareDates);
+        get(id) {
+            if (id && typeof id === 'string') {
+                return this._posts.find(item => item.id === id);
+            }
+            return undefined;
+        }
+
+        getPage(skip = 0, top = 10, filterConfig) {
+            this._posts.sort(PostCollection._compareDates);
             PostCollection._validateFilterConfig(filterConfig);
-            return posts.filter(isValid, filterConfig);
+            return this._posts.filter(PostCollection._isValid, filterConfig);
+        }
+
+        edit(id, post) {
+            if (!PostCollection._validateProperties(post)) {
+                return false;
+            }
+            for (let i = 0; i < posts.length; ++i) {
+                if (this._posts[i].id === id) {
+                    let tmpKeys = Object.keys(post);
+                    for (let index = 0; index < tmpKeys.length; ++index) {
+                        let key =  tmpKeys[index];
+                        this._posts[i][key] = post[key];
+                    }
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        add(post) {
+            if (!PostCollection._validatePost(post)) {
+                return false;
+            }
+            this._posts.push(post);
+            return true;
+        }
+
+        remove(id) {
+            if (typeof id !== 'string') {
+                return false;
+            }
+
+            let removePostIndex = this._posts.findIndex(item => item.id === id);
+            if (removePostIndex === -1) {
+                return false;
+            }
+            this._posts.splice(removePostIndex, 1);
+            return true;
+        }
+
+        addAll(posts) {
+            let badPosts = [];
+            if (!Array.isArray(posts)) {
+                return undefined;
+            }
+            for (let index = 0; index < posts.length; ++index) {
+                if (PostCollection._validatePost(posts[index])) {
+                    this._posts.push(posts[index]);
+                } else {
+                    badPosts.push(posts[index]);
+                }
+            }
+            return badPosts;
+        }
+
+        clear() {
+            this._posts.length = 0;
+        }
+
+        static _validateProperties(post) {
+            if (typeof post !== 'object') {
+                return false;
+            }
+            for (let property in post) {
+                if (post.hasOwnProperty(property)) {
+                    switch (property) {
+                        case 'description': {
+                            if (typeof post[property] !== 'string') {
+                                return false;
+                            }
+                            break;
+                        }
+                        case 'hashTags':
+                        case 'photoLinks': {
+                            if (!Array.isArray(post[property])
+                                || !post[property].every(function (element, index, array) {
+                                    return typeof element === 'string';
+                                })) {
+                                return false;
+                            }
+                            break;
+                        }
+
+                        default: {
+                            return false;
+                        }
+                    }
+                }
+            }
+            return true;
+        }
+
+        //validation for filter in getPosts
+        static _isValid(element, index, array) {
+            for (let property in this) {
+                if (this.hasOwnProperty(property)) {
+                    if (property === 'hashTags' || property === 'likes') {
+                        //hashtag or nickname of person, who liked post
+                        for (let filterElem in this[property]) {
+                            if (!element[property].find(arrayElem => arrayElem === filterElem)) {
+                                return false;
+                            }
+                        }
+                    } else {
+                        if (!element.hasOwnProperty(property) || element[property] !== this[property]) {
+                            return false;
+                        }
+                    }
+                }
+            }
+            return true;
         }
 
         static _compareDates(a, b) {
@@ -259,11 +362,9 @@ const Boost = (function() {
                     switch (property) {
                         case 'hashTags':
                         case 'likes':
-                        case 'photoLink': {
+                        case 'photoLinks': {
                             if (!Array.isArray(post[property])
-                                && !post[property].every(function (element, index, array) {
-                                    return typeof element === 'string';
-                                })) {
+                                && post[property].every(element => typeof element === 'string')) {
                                 return false;
                             }
                             optionalFieldAmount++;
@@ -318,117 +419,14 @@ const Boost = (function() {
                     }
                 }
             }
-
             return optionalFieldAmount === Object.keys(filterConfig).length;
         }
     }
-    
-    function isValid(element, index, array) {
-        for (let property in this) {
-            if (this.hasOwnProperty(property)) {
-                if (property === 'hashTags' || property === 'likes') {
-                    //hashtag or nickname of person, who liked post
-                    for (let filterElem in this[property]) {
-                        if (!element[property].find(arrayElem => arrayElem === filterElem)) {
-                            return false;
-                        }
-                    }
-                } else {
-                    if (!element.hasOwnProperty(property) || element[property] !== this[property]) {
-                        return false;
-                    }
-                }
-            }
-        }
-        return true;
-    }
-
-    function getPost(id) {
-        if (id && typeof id === 'string') {
-            return posts.find(item => item.id === id);
-        }
-        return undefined;
-    }
-
-    function addPost(post) {
-        if (!validatePost(post)) {
-            return false;
-        }
-        posts.push(post);
-        return true;
-    }
-
-    function validateProperties(post) {
-        if (typeof post !== 'object') {
-            return false;
-        }
-        for (let property in post) {
-            if (post.hasOwnProperty(property)) {
-                switch (property) {
-                    case 'description': {
-                        if (typeof post[property] !== 'string') {
-                            return false;
-                        }
-                        break;
-                    }
-                    case 'hashTags':
-                    case 'photoLink': {
-                        if (!Array.isArray(post[property])
-                            && !post[property].every(function (element, index, array) {
-                                return typeof element === 'string';
-                            })) {
-                            return false;
-                        }
-                        break;
-                    }
-
-                    default: {
-                        return false;
-                    }
-                }
-            }
-        }
-        return true;
-    }
-
-    function editPost(id, post) {
-        if (!validateProperties(post)) {
-            return false;
-        }
-        for (let i = 0; i < posts.length; ++i) {
-            if (posts[i].id === id) {
-                let tmpKeys = Object.keys(post);
-                for (let index = 0; index < tmpKeys.length; ++index) {
-                    let key =  tmpKeys[index];
-                    posts[i][key] = post[key];
-                }
-                return true;
-            }
-        }
-        return false;
-    }
-
-    function removePost(id) {
-        if (typeof id !== 'string') {
-            return false;
-        }
-
-        let removePostIndex = posts.findIndex(item => item.id === id);
-        if (removePostIndex === -1) {
-            return false;
-        }
-        posts.splice(removePostIndex, 1);
-        return true;
-    }
-
+    let collection = new PostCollection(posts);
     return {
-        getPosts: getPosts,
-        getPost: getPost,
-        addPost: addPost,
-        editPost: editPost,
-        removePost: removePost
+        collection : collection,
+        posts: posts
     }
-
 })();
 
 
